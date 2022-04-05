@@ -22,14 +22,6 @@ export const Container = styled.div`
 		}
 
 		form {
-			a {
-				display: block;
-				text-decoration: none;
-				text-align: center;
-				color: #8c52e5;
-				margin: 20px 0;
-			}
-
 			input {
 				width: 100%;
 				height: 32px;
@@ -52,6 +44,14 @@ export const Container = styled.div`
 					background: #8c52e5;
 					color: #fff;
 				}
+			}
+
+			a {
+				display: block;
+				text-decoration: none;
+				text-align: center;
+				color: #8c52e5;
+				margin: 20px 0;
 			}
 		}
 	}

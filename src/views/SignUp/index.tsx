@@ -1,17 +1,15 @@
 import React, { FormEvent, useCallback, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Loader from '../../components/Loader';
 import { api } from '../../services/api';
 import { Container } from './style';
 
 interface IData {
-	registro: string;
 	name: string;
 	email: string;
-	telefone: string;
-	celular: string;
-	senha: string;
-	profissao: string;
+	password: string;
 }
 
 const SignUp: React.FC = () => {
@@ -23,27 +21,27 @@ const SignUp: React.FC = () => {
 		(e: FormEvent<HTMLFormElement>) => {
 			e.preventDefault();
 
-			const headers = {
-				'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-			};
 			setLoad(true);
 
-			api.post('', data, )
+			api.post('users', data)
 				.then((response) => {
-					if (response.status === 200) {
-						toast.success('Cadastro realizado com sucesso!', {
-							onClose: () => navigate('/signin'),
-							hideProgressBar: false,
-						});
-					}
+					setLoad(false);
+					toast.success('Cadastro realizado com sucesso! Você está sendo redirecionado para a página de login.', {
+						hideProgressBar: false,
+						onClose: () => navigate('/signin'),
+					});
 				})
 				.catch((e) => {
 					toast.error('Oops, algo deu errado!');
-					setLoad(false);
-				});
+				})
+				.finally(() => setLoad(false));
 		},
 		[data, navigate]
 	);
+
+	if (load) {
+		return <Loader />;
+	}
 	return (
 		<Container>
 			<div className="card">
@@ -51,23 +49,8 @@ const SignUp: React.FC = () => {
 				<form onSubmit={handleSubmit}>
 					<input
 						type="text"
-						placeholder="Informe seu registro"
-						onChange={(e) => setData({ ...data, registro: e.target.value })}
-					/>
-					<input
-						type="text"
 						placeholder="Informe seu nome"
 						onChange={(e) => setData({ ...data, name: e.target.value })}
-					/>
-					<input
-						type="text"
-						placeholder="Informe seu telefone"
-						onChange={(e) => setData({ ...data, telefone: e.target.value })}
-					/>
-					<input
-						type="text"
-						placeholder="Informe seu celular"
-						onChange={(e) => setData({ ...data, celular: e.target.value })}
 					/>
 					<input
 						type="email"
@@ -77,14 +60,11 @@ const SignUp: React.FC = () => {
 					<input
 						type="password"
 						placeholder="Informe sua senha"
-						onChange={(e) => setData({ ...data, senha: e.target.value })}
+						onChange={(e) => setData({ ...data, password: e.target.value })}
 					/>
-					<input
-						type="text"
-						placeholder="Informe sua profissão"
-						onChange={(e) => setData({ ...data, profissao: e.target.value })}
-					/>
+
 					<input type="submit" value="Cadastrar" />
+					<Link to="/signin">Clique aqui para logar.</Link>
 				</form>
 			</div>
 		</Container>
