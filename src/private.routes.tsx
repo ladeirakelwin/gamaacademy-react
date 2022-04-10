@@ -1,13 +1,13 @@
-import { Routes as Switch, BrowserRouter, Route, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import { ReactNode } from 'react';
 
 type Props = {
 	children: ReactNode;
 	redirectTo: string;
-}
+};
 
-const PrivateRoutes = ({ children, redirectTo}: Props) => {
+const PrivateRoutes = ({ children, redirectTo }: Props) => {
 	const isLoggedIn: string | null = localStorage.getItem('@gamaServiceToken');
 
 	const isSectionActive: any = () => {
@@ -23,8 +23,7 @@ const PrivateRoutes = ({ children, redirectTo}: Props) => {
 		}
 	};
 
-	return isSectionActive() ? <>
-	{children}</> : <Navigate to={redirectTo}/>
+	return isSectionActive() ? <>{children}</> : <Navigate to={redirectTo} />;
 };
 
 export default PrivateRoutes;

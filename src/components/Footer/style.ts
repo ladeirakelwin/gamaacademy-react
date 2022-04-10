@@ -12,4 +12,8 @@ export const FooterStyle = styled.footer`
     color: #fff;
     font-weight: bold;
   }
+
+  p:first-child {
+    margin: 0 10px 0 0;
+  }
 ` 
