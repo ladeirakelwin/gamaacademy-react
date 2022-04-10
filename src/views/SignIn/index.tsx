@@ -28,7 +28,7 @@ const SignIn: React.FC = () => {
 					localStorage.setItem('@gamaServiceToken', sessionToken);
 					setLoad(false);
 					toast.success(
-						'Cadastro realizado com sucesso! Você está sendo redirecionado para a página de dashboard.',
+						'Login realizado com sucesso! Você está sendo redirecionado para a página de dashboard.',
 						{
 							hideProgressBar: false,
 							onClose: () => navigate('/dashboard'),

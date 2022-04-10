@@ -1,21 +1,15 @@
-import React from 'react';
 import { Container } from './style';
 import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
 
-const Home: React.FC = () => {
-
+const Courses: React.FC = () => {
 	return (
 		<>
 			<Nav />
-			<Container>
-				<div>
-					<h1>Home</h1>
-				</div>
-			</Container>
+			<Container>Courses</Container>
 			<Footer />
 		</>
 	);
 };
 
-export default Home;
+export default Courses;
